@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {PersonaService} from './service/persona.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {NotificationService} from './service/notification.server';
 
 @Component({
   selector: 'umg-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   // definir "FormGroup" para ingreso de datos por formulario
   public formGroup: FormGroup;
 
-  constructor(private personaService: PersonaService) {
+  constructor(private personaService: PersonaService,
+              private notificationService: NotificationService) {
 
   }
 
@@ -61,7 +63,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-
   private initForm(): void {
     this.formGroup = new FormGroup({
       nombre: new FormControl('', []
@@ -75,6 +76,24 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  /* ------------------------------------------------------------------------------------------------- */
+  private handleMessageReceived(message: any): void {
+    console.log('Mensaje recibido:' + JSON.stringify(message));
+  }
+
+  /* ------------------------------------------------------------------------------------------------- */
+  public doNotificationSubscription(): void {
+    try {
+      this.notificationService.getPersonaNotification().subscribe((result) => {
+        this.handleMessageReceived(result);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  /* ------------------------------------------------------------------------------------------------- */
+
   ngAfterViewInit(): void {
     console.log('on after view');
   }
@@ -86,6 +105,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
 
     console.log('on init');
+
+    // realizar suscripcion
+    this.doNotificationSubscription();
 
     // iniciar formulario
     this.initForm();

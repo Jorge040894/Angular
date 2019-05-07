@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PersonaService} from './service/persona.service';
+import {NotificationService} from './service/notification.server';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {PersonaService} from './service/persona.service';
     ReactiveFormsModule
   ],
   providers: [
-    PersonaService
+    PersonaService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
