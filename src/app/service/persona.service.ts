@@ -54,5 +54,8 @@ export class PersonaService {
       .put(url, JSON.stringify(model), {headers: headers});
   }
 
-  /* -------------------------------------------------------------------------------------------------------------- */
+  /* -----------------------entrega 2----------------------------------------------------- */
+     public obtener(): Observable<any>{
+        return this.httpClient.get("http://localhost:8585/persona/all");
+   }
 }

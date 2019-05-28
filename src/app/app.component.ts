@@ -2,6 +2,8 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {PersonaService} from './service/persona.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {NotificationService} from './service/notification.server';
+import {campos} from './classes/campos';
+import {Observable, BehaviorSubject} from 'rxjs/index';
 
 @Component({
   selector: 'umg-root',
@@ -14,10 +16,16 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   // definir "FormGroup" para ingreso de datos por formulario
   public formGroup: FormGroup;
 
+  public listadatos:campos[];
+  public envivo: BehaviorSubject<any>;
+
   constructor(private personaService: PersonaService,
               private notificationService: NotificationService) {
 
   }
+
+
+
 
   public onClick(): void {
     console.log('on click');
@@ -49,6 +57,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     let parametros: any = null;
     parametros = Object.assign({}, this.formGroup.value);
 
+
     let datosAEnviar: any = {
       primerNombre: parametros.nombre,
       segundoNombre: parametros.apellido,
@@ -76,10 +85,41 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+
+  /*-------entrega2------------------*/
+
+     public obtener1(): void{
+   
+   this.personaService.obtener().subscribe(
+      data=>
+      {
+      this.listadatos = data;
+      }
+  );
+        console.log('Actualizando la tabla');
+   }
+   /*-----------------------------------------------*/
+
+   /*Const DATA1 = [any];
+   private DataStore = new BehaviorSubject(this.DATA1);
+*/
+
   /* ------------------------------------------------------------------------------------------------- */
   private handleMessageReceived(message: any): void {
-    console.log('Mensaje recibido:' + JSON.stringify(message));
-  }
+    this.listadatos.push(message);
+    console.log(/*'Mensaje recibido:' + JSON.stringify*/(message));
+
+
+
+
+       /*this.personaService.obtener().subscribe(
+      data=>
+      {
+      this.listadatos = data;
+      }
+  );
+        console.log('Actualizando la tabla');*/
+  } 
 
   /* ------------------------------------------------------------------------------------------------- */
   public doNotificationSubscription(): void {
@@ -106,6 +146,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
     console.log('on init');
 
+    this.envivo = new BehaviorSubject(null);
+
     // realizar suscripcion
     this.doNotificationSubscription();
 
@@ -117,8 +159,16 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       .personaList(null)
       .subscribe((result) => {
         console.log('RESULTADO:' + JSON.stringify(result));
+        this.listadatos = result;
+        this.envivo.next(this.listadatos);
       });
   }
-
-
+  /*
+      this.personaService.obtener().subscribe(
+      data=>
+      {
+      this.listadatos = data;
+      }
+  );
+  */
 }
