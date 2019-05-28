@@ -106,19 +106,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /* ------------------------------------------------------------------------------------------------- */
   private handleMessageReceived(message: any): void {
-    this.listadatos.push(message);
-    console.log(/*'Mensaje recibido:' + JSON.stringify*/(message));
-
-
-
-
-       /*this.personaService.obtener().subscribe(
-      data=>
-      {
-      this.listadatos = data;
-      }
-  );
-        console.log('Actualizando la tabla');*/
+      this.listadatos.push(JSON.parse(message));
   } 
 
   /* ------------------------------------------------------------------------------------------------- */
