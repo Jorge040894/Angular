@@ -5,6 +5,9 @@ import {NotificationService} from './service/notification.server';
 import {campos} from './classes/campos';
 import {Observable, BehaviorSubject} from 'rxjs/index';
 
+/*import { MatSnackBarModule } from "@angular/material/snack-bar";
+*/
+
 @Component({
   selector: 'umg-root',
   templateUrl: './app.component.html',
@@ -17,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public formGroup: FormGroup;
 
   public listadatos:campos[];
+  
   public envivo: BehaviorSubject<any>;
 
   constructor(private personaService: PersonaService,
@@ -24,7 +28,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-
+//
 
 
   public onClick(): void {
@@ -37,6 +41,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
     let parametros: any = null;
     parametros = Object.assign({}, this.formGroup.value);
+
 
     let datosAEnviar: any = {
       primerNombre: parametros.nombre,
@@ -81,13 +86,11 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       edad: new FormControl('', []
       )
     });
-
-
   }
 
 
   /*-------entrega2------------------*/
-
+/*
      public obtener1(): void{
    
    this.personaService.obtener().subscribe(
@@ -97,7 +100,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }
   );
         console.log('Actualizando la tabla');
-   }
+   }*/
+   
    /*-----------------------------------------------*/
 
    /*Const DATA1 = [any];

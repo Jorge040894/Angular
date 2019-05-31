@@ -1,41 +1,44 @@
+<!--<div><img src="umg.png"></div>-->
 
+<div style="text-align:center">
+  <h1>Angular Progra 3</h1>
+</div><br/><br/>
 
-<button (click)="onClick()">
-  hola
-</button>
-
-<div>
+<div style="text-align:center">
   <form id="f01" [formGroup]="formGroup">
 
-    <label>nombre:</label>
-    <input type="text" formControlName="nombre"/>
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre"/><br/><br/>
 
-    <label>apellido:</label>
-    <input type="text" formControlName="apellido"/>
+    <label>Apellido:</label>
+    <input type="text" formControlName="apellido"/><br/><br/>
 
-    <label>edad:</label>
-    <input type="text" formControlName="edad"/>
+    <label>Edad:</label>
+    <input type="text" formControlName="edad"/><br/><br/>
 
     <button (click)="enviarFormulario()">
-      guardar
-    </button>
+      Guardar
+    </button><br/><br/>
 
     <button (click)="actualizarFormulario()">
-      actualizar
-    </button>
+      Actualizar
+    </button><br/><br/>
 
   </form>
 </div>
 
 <div style="text-align:center">
+
+
 <h1>Personas</h1>
-
+<!--
 <button (click)="obtener1()">obtener</button>
-
-</div>
-<table border="1">
+-->
 
 
+
+
+<table style="margin: 0 auto;" border="1">
 <tr>
 <th>Id</th>
 <th>nombre</th>
@@ -50,6 +53,6 @@
     <th>{{d.edad}}</th>
 </tr>
 </table>
-
+</div>
 
 <router-outlet></router-outlet>
